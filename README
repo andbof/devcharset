@@ -1,0 +1,51 @@
+devcharset is a CUSE (Character Device in UserSpace) implementation of a device
+node similar to /dev/zero, but with a modifiable character set. It can output
+any combination of characters and ranges.
+
+Copyright (C) 2013 Andreas Bofjäll <andreas@gazonk.org>
+
+WHERE TO GET IT
+
+  The official repository is at github: https://github.com/andbof/devcharset
+
+BASIC INSTALLATION
+
+  Run "./configure" and correct any errors reported, such as installing
+  missing packages. If "configure" doesn't exist, you've most likely cloned
+  the git repository, and you need to run "./bootstrap" first (if bootstrap
+  complains about missing files, you need to install autoconf and automake;
+  see your distributions documentation on how to do that).
+
+  Compile by running "make", followed by "sudo make install" to do a standard
+  system-wide installation. If you want to install into another directory, such
+  as into your home, run "./configure --prefix=/full/installation/path",
+  followed by "make" and "make install".
+
+CONFIGURING
+
+  At runtime, devcharset can be configured to use for example a different
+  character set, a different random device or use a different charset device
+  node name.
+
+  The character set is given as a list of characters or range of characters in
+  normal, hexadecimal, decimal or octal form. The following examples are all
+  equivalent and will use the US ASCII alphabet (i.e. lowercase 'a' to 'z'):
+
+  devcharset -c a-z		(normal character range)
+  devcharset -c abcd-uvw-z	(more advanced ranges)
+  devcharset -c '\97-\122'	(decimal values are prefixed with '\')
+  devcharset -c '\x61-\x7a'	(hexadecimal values are prefixed with '\x')
+  devcharset -c '\0141-\0172'	(octal values are prefixed with '\0')
+  devcharset -c '\0141 \98 c-z'	(space separated characters and ranges)
+
+  Additional help is available by running "devcharset -h"
+
+RUNNING
+
+  Start the binary (devcharset). Assuming you have CUSE support compiled in and
+  the currently logged in user has access to /dev/fuse, a device node will be
+  created (the default name is /dev/charset).
+
+  Reading from /dev/charset will output random characters in the character set
+  specified by "-c", or the default set of "a-z" if nothing special has been
+  specified.

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+ARCHIVE="$1"
+CFLAGS="-Werror"
+NBUILD=$(/usr/bin/nproc)
+MAKE="make -j $NBUILD"
+
+get_directory_name() {
+	local FILE="$1"
+	local DIRS="$(tar -taf "$FILE" | cut -d '/' -f 1 | sort -u)"
+	local NUM_DIRS=$(echo "$DIRS" | wc -l)
+
+	if [[ $NUM_DIRS -ne 1 ]]; then
+		echo "fatal: file \"$FILE\" seems to contain more than one directory" 1>&2
+		exit 1
+	fi
+
+	echo "$DIRS"
+}
+
+if [ -z "$ARCHIVE" ]; then
+	echo "syntax: $0 <file>" 1>&2
+	exit 1
+fi
+
+if [ ! -f "$ARCHIVE" ]; then
+	echo "fatal: file \"$ARCHIVE\" not found" 1>&2
+	exit 1
+fi
+
+DIR=$(get_directory_name "$ARCHIVE")
+echo "DIR = \"$DIR\""
+rm -rf "$DIR"
+tar -xaf "$ARCHIVE"
+cd "$DIR"
+
+./configure CFLAGS="$CFLAGS"
+$MAKE
+$MAKE check
+
+cp config.log ..
+cd ..

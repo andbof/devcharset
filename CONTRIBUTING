@@ -1,0 +1,20 @@
+I'm very happy to receive contributions, don't be afraid to send in patches.
+
+For coding style, follow the Linux kernel coding style available at
+
+https://www.kernel.org/doc/Documentation/CodingStyle
+
+All code you contribute must be licensed according to the LICENSE file. You
+may of course only contribute code that you have written yourself or
+otherwise have rights to pass on as an open source patch as per the terms in
+the LICENSE file.
+
+Your commits must be done using your real name (sorry, no pseudonyms or
+anonymous contributions).
+
+To actually get your code in, either send me a mail at andreas@gazonk.org with
+your patch or create a pull request in github. Either works fine. If you're
+unsure on something, just drop me a mail. Most of the times I'll be happy to
+answer.
+
+Happy hacking!
