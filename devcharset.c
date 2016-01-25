@@ -104,7 +104,7 @@ static int fill_buffer_from_fd(unsigned char *buf, const size_t size,
 	size_t idx = 0;
 
 	do {
-		r = read(fd, buf, size - idx);
+		r = read(fd, buf + idx, size - idx);
 		if (r < 0)
 			return 1;
 
