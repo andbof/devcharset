@@ -1,0 +1,7 @@
+language: c
+compiler:
+        - clang
+before_install:
+        - sudo apt-get -qq update
+        - sudo apt-get install libfuse2 libfuse-dev
+script: ./bootstrap && ./configure && make && make check && make distcheck
