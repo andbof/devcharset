@@ -162,6 +162,7 @@ static int process_arg(void *data, const char *arg, int key,
 		return fuse_opt_add_arg(outargs, "-ho");
 	case KEY_DEBUG:
 		/* We're consuming the switch here and must re-add it so FUSE gets it */
+		debug = 1;
 		return fuse_opt_add_arg(outargs, "-d");
 	case KEY_VERSION:
 		fprintf(stderr, PACKAGE_NAME " version " PACKAGE_VERSION "\n");
