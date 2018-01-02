@@ -10,18 +10,22 @@ AM_CPPFLAGS = $(fuse_CPPFLAGS)
 AM_LDFLAGS = $(fuse_LIBS)
 AM_YFLAGS = -d
 
-BUILT_SOURCES = parser.c parser.h lexer.c
+BUILT_SOURCES = \
+		src/parser.c \
+		src/parser.h \
+		src/lexer.c
 
 devcharset_SOURCES = \
-		     devcharset.c \
-		     lexer.l \
-		     parse.h \
-		     parser.y
+		     src/devcharset.c \
+		     src/lexer.l \
+		     src/parse.h \
+		     src/parser.y
 
+parser_test_CPPFLAGS = -I$(srcdir)/src
 parser_test_SOURCES = \
-		      lexer.l \
-		      parse.h \
-		      parser.y \
+		      src/lexer.l \
+		      src/parse.h \
+		      src/parser.y \
 		      test/parser-test.c
 
 # This is a way of keeping version information in the distribution tarball
