@@ -52,20 +52,20 @@ struct params {
 
 #define CHARSET_OPT(t, p) { t, offsetof(struct params, p), 1 }
 static const struct fuse_opt charset_opts[] = {
-	CHARSET_OPT("-M %u", major),
-	CHARSET_OPT("--maj=%u", major),
-	CHARSET_OPT("-m %u", minor),
-	CHARSET_OPT("--min=%u", minor),
-	CHARSET_OPT("-n %s", devname),
-	CHARSET_OPT("--name=%s", devname),
 	CHARSET_OPT("-c %s", charset),
 	CHARSET_OPT("--charset %s", charset),
-	CHARSET_OPT("-r %s", random_dev),
-	CHARSET_OPT("--random %s", random_dev),
 	FUSE_OPT_KEY("-d", KEY_DEBUG),
 	FUSE_OPT_KEY("--debug", KEY_DEBUG),
 	FUSE_OPT_KEY("-h", KEY_HELP),
 	FUSE_OPT_KEY("--help", KEY_HELP),
+	CHARSET_OPT("-m %u", minor),
+	CHARSET_OPT("--min=%u", minor),
+	CHARSET_OPT("-M %u", major),
+	CHARSET_OPT("--maj=%u", major),
+	CHARSET_OPT("-n %s", devname),
+	CHARSET_OPT("--name=%s", devname),
+	CHARSET_OPT("-r %s", random_dev),
+	CHARSET_OPT("--random %s", random_dev),
 	FUSE_OPT_KEY("-V", KEY_VERSION),
 	FUSE_OPT_KEY("--version", KEY_VERSION),
 	FUSE_OPT_END
