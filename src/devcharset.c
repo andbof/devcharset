@@ -43,9 +43,9 @@ static size_t valid_chars_size;
 static const char *random_dev;
 
 struct params {
-	unsigned major;
-	unsigned minor;
 	char *charset;
+	unsigned int major;
+	unsigned int minor;
 	char *devname;
 	char *random_dev;
 };
