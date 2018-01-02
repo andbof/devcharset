@@ -218,6 +218,7 @@ static void charset_open(fuse_req_t req, struct fuse_file_info *fi)
 
 	data->rand_fd = open_dev(random_dev);
 	if (data->rand_fd < 0) {
+		free(data);
 		assert(errno);
 		fuse_reply_err(req, errno);
 		return;
@@ -226,6 +227,8 @@ static void charset_open(fuse_req_t req, struct fuse_file_info *fi)
 	data->valid_chars_size = valid_chars_size;
 	data->valid_chars = malloc(valid_chars_size);
 	if (!data->valid_chars) {
+		close(data->rand_fd);
+		free(data);
 		fuse_reply_err(req, ENOMEM);
 		return;
 	}
