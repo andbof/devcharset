@@ -83,12 +83,9 @@ int set_charset(char **out_charset, size_t *out_size, const char *input)
 		return 1;
 
 	size_t j = 0;
-	for (size_t i = 0; i < size; i++) {
-		while (!valid_chars[j])
-			j++;
-
-		charset[i] = j;
-		j++;
+	for (size_t i = 0; i < sizeof(valid_chars); i++) {
+		if (valid_chars[i])
+			charset[j++] = i;
 	}
 
 	*out_size = size;
