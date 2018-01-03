@@ -4,7 +4,7 @@
 #include <string.h>
 #include "parse.h"
 
-#define NUM_TESTS 24
+#define NUM_TESTS 34
 
 struct test {
 	char *input;
@@ -44,6 +44,16 @@ static const char *invalids[] = {
 	"",
 	"c-a",
 	"a-c-g",
+	"\\0-\\256",
+	"\\0-\\999",
+	"\\0-\\0378",
+	"\\0-\\0777",
+	"\\254-\\256",
+	"\\255-\\256",
+	"\\0376-\\0378",
+	"\\0377-\\0378",
+	"\\0--\\255",
+	"\\00--\\0123",
 	NULL
 };
 
@@ -65,6 +75,10 @@ static unsigned int test_invalid_input(void)
 
 	for (const char **test = invalids; *test; test++) {
 		assert(set_charset(&out, &size, *test));
+		/*
+		 * Make sure set_charset() hasn't touched out and size,
+		 * as the charset was invalid.
+		 */
 		assert(out == MAGIC_PTR);
 		assert(size == MAGIC_INT);
 
